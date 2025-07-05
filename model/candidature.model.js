@@ -79,10 +79,10 @@ Candidature.createCandidature = async function (userData) {
   }
 };
 // Méthode statique pour créer un utilisateur
-Bourse.showBourse = async function () {
+Candidature.showBourse = async function () {
   try {
-    const bourses = await Bourse.findAll();
-    return bourses; // Renvoyer l'utilisateur créé
+    const newCandidature = await Candidature.findAll();
+    return newCandidature; // Renvoyer l'utilisateur créé
   } catch (err) {
     throw new Error(err.message); // Propager l'erreur si nécessaire
   }

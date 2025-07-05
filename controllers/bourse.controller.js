@@ -1,5 +1,6 @@
 const Bourse = require('../model/bourse.model');
 const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
 
 exports.creationBourse = async (req, res) => {
 console.log('req.body.password', req.body.nomBourse)
@@ -34,3 +35,54 @@ exports.getBourseById = async (req, res) => {
     res.status(500).json({ message: 'Erreur serveur' })
   }
 }
+
+
+exports.searchBourse = async (req, res) => {
+  const query = req.query.query || ''; // valeur par défaut
+
+  try {
+    console.log('🔍 Recherche pour query =', query);
+
+    const bourses = await Bourse.findAll({
+      where: {
+        nomBourse: {
+          [Op.like]: `%${query}%` 
+        }
+      }
+    });
+
+    console.log('✅ Résultat trouvé :', bourses.length, 'bourses');
+    res.json(bourses);
+
+  } catch (error) {
+    console.error('❌ Erreur dans searchBourse :', error);
+    res.status(500).json({ error: 'Erreur lors de la recherche.' });
+  }
+};
+exports.getBoursesWithFilters = async (req, res) => {
+  try {
+    const filters = req.query;
+
+    // Construire la clause WHERE pour Sequelize
+    const whereClause = {};
+
+    if (filters.type) whereClause.type = filters.type;
+    if (filters.pays) whereClause.pays = filters.pays;
+    if (filters.niveau) whereClause.niveau = filters.niveau;
+    if (filters.taux) whereClause.taux = filters.taux;
+    if (filters.duree) whereClause.duree = filters.duree;
+
+    // Recherche par mot-clé (search)
+    if (filters.search) {
+      whereClause.nomBourse = { [Sequelize.Op.like]: `%${filters.search}%` };
+    }
+
+    // Récupérer les bourses filtrées
+    const filteredBourses = await Bourse.findAll({ where: whereClause });
+
+    res.json(filteredBourses);
+  } catch (error) {
+    console.error('Erreur lors de la recherche des bourses :', error);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};

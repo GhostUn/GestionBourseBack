@@ -11,7 +11,7 @@ router.post('/', validateBourse, bourseController.creationBourse);
 console.log('✅ Get');
 
 router.get('/', bourseController.showBourse);
+router.get('/search/', bourseController.searchBourse); // ?query=motcle
 router.get('/:id', bourseController.getBourseById);
-
 
 module.exports = router;
