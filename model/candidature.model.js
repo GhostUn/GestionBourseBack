@@ -20,15 +20,8 @@ id: {
     type: DataTypes.STRING,
     allowNull: false
   },
-    document: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+  
     phoneNumber: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-    amount: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -56,7 +49,14 @@ id: {
     type: DataTypes.TEXT,
     allowNull: false
   },
-  
+   montant: {
+    type: DataTypes.INTEGER,
+    defaultValue: 100000,
+  },
+   statutPaiement: {
+    type: DataTypes.STRING,
+    defaultValue: 'en attente',
+  },
 
 }, {
   tableName: 'Candidature'

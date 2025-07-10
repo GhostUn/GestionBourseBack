@@ -1,9 +1,11 @@
 const express = require('express');
 require('dotenv').config();
 const sequelize = require('./config/db.config');
+const cors = require('cors'); 
+const path = require('path');
+
 const userRoutes = require('./router/user.route');
 const niveauRoutes = require("./router/niveauEtude")
-const cors = require('cors'); 
 const authRoutes = require('./router/auth.route')
 const domaineRoutes = require('./router/domaine.route')
 const boursesRoutes = require('./router/bourse.route')
@@ -16,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); 
 
 app.use(cors({
-  origin: 'http://localhost:3001' // par exemple pour Vite
+  origin: 'http://localhost:3000' // par exemple pour Vite
 }));
  
 app.use(express.json());
@@ -26,7 +28,7 @@ app.use('/api/DomaineBourse', domaineRoutes);
 app.use('/api/NiveauEtude', niveauRoutes);
 app.use('/api/Bourses', boursesRoutes);
 app.use('/api/Candidatures', candidatureRoutes);
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 sequelize.authenticate()
   .then(() => {

@@ -38,24 +38,34 @@ exports.getBourseById = async (req, res) => {
 
 
 exports.searchBourse = async (req, res) => {
-  const query = req.query.query || ''; // valeur par défaut
+    const {
+    search,
+    type,
+    pays,
+    niveau,
+    taux,
+    duree,
+    
+  } = req.query;
 
   try {
-    console.log('🔍 Recherche pour query =', query);
+    const whereClause = {
+      nomBourse: { [Op.like]: `%${search}%` }
+    };
 
-    const bourses = await Bourse.findAll({
-      where: {
-        nomBourse: {
-          [Op.like]: `%${query}%` 
-        }
-      }
-    });
+    if (type) whereClause.type = type;
+    if (pays) whereClause.pays = pays;
+    if (niveau) whereClause.niveau = niveau;
+    if (taux) whereClause.taux = taux;
+    if (duree) whereClause.duree = duree;
 
-    console.log('✅ Résultat trouvé :', bourses.length, 'bourses');
+    const bourses = await Bourse.findAll({ where: whereClause });
+
     res.json(bourses);
 
   } catch (error) {
-    console.error('❌ Erreur dans searchBourse :', error);
+    
+    console.error('Erreur dans searchBourse:', error);
     res.status(500).json({ error: 'Erreur lors de la recherche.' });
   }
 };
