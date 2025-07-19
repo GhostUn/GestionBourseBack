@@ -55,9 +55,10 @@ const Paiement = async (amount, phoneNumber, email) => {
         amount: 1000,
         shop_name: 'Test Bourse University',
         message: "400",
-        success_url: 'https://ton-site.com/paiement-success',
-        failure_url: 'https://ton-site.com/paiement-echec',
-        order_id: reference
+        success_url: 'https://df8c1e79a480.ngrok-free.app/paiement-success',
+        failure_url: 'https://df8c1e79a480.ngrok-free.app/paiement-echec',
+        order_id: reference,
+      
       })
     });
 
@@ -70,7 +71,11 @@ const Paiement = async (amount, phoneNumber, email) => {
 
           // Retourne un objet contenant redirectUrl
         if (result.link) {
-          return { success: true, redirectUrl: result.link.trim() };
+          return {
+                success: true,
+                redirectUrl: result.link.trim(),
+                reference
+              };
         } else {
           throw new Error("Le lien de paiement n'est pas disponible dans la réponse.");
         }
@@ -290,6 +295,7 @@ exports.postuler = async (req, res) => {
       recuUrl: `http://localhost:3003/uploads/recus/${filename}`, // URL du reçu PDF
       payment_url: paiement.redirectUrl // Utilisez redirectUrl ici
     });
+
 
   } catch (err) {
     console.error(err);
