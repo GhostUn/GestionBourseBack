@@ -5,6 +5,18 @@ const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const axios = require('axios');
 
+exports.getCandidaturesByEmail = async (req, res) => {
+  const email = req.params.email;
+  console.log('email', req.params)
+  try {
+    const candidatures = await Candidature.getByEmail(email);
+    res.status(200).json(candidatures);
+  } catch (err) {
+    console.error('Erreur lors de la récupération des candidatures :', err.message);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+};
+
 exports.creationCandidature = async (req, res) => {
 console.log('req.body.password', req.body.nomEt)
   try {

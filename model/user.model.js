@@ -2,11 +2,13 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
 
 const User = sequelize.define('User', {
-  id: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    primaryKey:true,
-  },
+ id: {
+  type: DataTypes.INTEGER,
+  primaryKey: true,
+  autoIncrement: true,
+  allowNull: false
+}
+,
   name: {
     type: DataTypes.STRING,
     allowNull: false
@@ -42,17 +44,17 @@ const User = sequelize.define('User', {
 module.exports = User;
 
 // Méthode statique pour créer un utilisateur
-User.createUser = async function (userData) {
+User.UserCreate = async function (userData) {
+  console.log('userData', userData);
   try {
-    const user = await this.create({
-      userData
-    });
-
-    return user; // Renvoyer l'utilisateur créé
+    const user = await this.create(userData); // On passe directement l'objet
+    return user;
   } catch (err) {
-    throw new Error(err.message); // Propager l'erreur si nécessaire
+    console.log('err', err)
+    throw new Error(err.message);
   }
 };
+
 module.exports = User;
 // Méthode statique pour créer un utilisateur
 User.userFind = async function (email) {

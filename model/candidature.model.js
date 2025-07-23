@@ -87,4 +87,14 @@ Candidature.showBourse = async function () {
     throw new Error(err.message); // Propager l'erreur si nécessaire
   }
 };
+Candidature.getByEmail = async function (email) {
+  try {
+    const candidatures = await this.findAll({
+      where: { email }
+    });
+    return candidatures;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 module.exports = Candidature;

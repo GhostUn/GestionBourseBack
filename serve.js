@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); 
 
 app.use(cors({
-  origin: 'http://localhost:3000' // par exemple pour Vite
+  origin: '*' // par exemple pour Vite
 }));
  
 app.use(express.json());

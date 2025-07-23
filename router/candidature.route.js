@@ -32,8 +32,9 @@ router.post(
   CandidatureController.postuler
 );
 
-
-console.log('✅ domaine.router.js chargé');
+// routes.ts
+router.get('/:email', CandidatureController.getCandidaturesByEmail);
+console.log('✅ domaine.router.js chargé can');
 console.log('✅ fonction:', CandidatureController.creationBourse);
 /*
 router.post('/', CandidatureController.creationCandidature);

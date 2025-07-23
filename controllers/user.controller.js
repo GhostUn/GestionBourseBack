@@ -8,7 +8,8 @@ console.log('req.body.password', req.body.password)
     // Hash the password and insert into MySQL
     const hashedPassword = await bcrypt.hash(password, 10);
     req.body.password = hashedPassword
-    const user = await User.create(req.body);
+    const user = await User.UserCreate(req.body);
+    console.log('user', user)
     res.status(201).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
