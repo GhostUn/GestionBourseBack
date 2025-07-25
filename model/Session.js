@@ -22,6 +22,6 @@ const Session = sequelize.define('Session', {
     type: DataTypes.DATE,
     allowNull: false,
   },
-});*/
+});
 
-module.exports = Session;
+module.exports = Session;*/
