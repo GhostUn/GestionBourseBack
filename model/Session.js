@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
-
+/*
 const Session = sequelize.define('Session', {
   userId: {
     type: DataTypes.INTEGER,
@@ -22,6 +22,6 @@ const Session = sequelize.define('Session', {
     type: DataTypes.DATE,
     allowNull: false,
   },
-});
+});*/
 
 module.exports = Session;
