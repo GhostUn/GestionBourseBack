@@ -18,7 +18,7 @@ const Domaine = sequelize.define('Domaine', {
         require:true
     }
 }, {
-  tableName: 'Domaine'
+  tableName: 'domaine'
 });
 
 module.exports = Domaine;

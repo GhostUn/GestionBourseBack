@@ -18,7 +18,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); 
 
 app.use(cors({
-  origin: '*' // par exemple pour Vite
+    origin: [
+    'http://localhost:3000',               // développement local
+    'https://gestionbourse.onrender.com',      // front-end déployé
+  ],
 }));
  
 app.use(express.json());

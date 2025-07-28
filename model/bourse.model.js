@@ -67,7 +67,7 @@ id: {
   
 
 }, {
-  tableName: 'Bourse'
+  tableName: 'bourse'
 });
 
 module.exports = Bourse;

@@ -36,11 +36,11 @@ router.post(
 router.get('/:email', CandidatureController.getCandidaturesByEmail);
 console.log('✅ domaine.router.js chargé can');
 console.log('✅ fonction:', CandidatureController.creationBourse);
+router.get('/', CandidatureController.getAllCandidature);
 /*
 router.post('/', CandidatureController.creationCandidature);
 console.log('✅ Get');
 
-router.get('/', bourseController.showBourse);
 router.get('/:id', bourseController.getBourseById);
 */
 

@@ -5,6 +5,17 @@ const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const axios = require('axios');
 
+exports.getAllCandidature = async (req, res) => {
+  const email = req.params.email;
+  console.log('email', req.params)
+  try {
+    const candidatures = await Candidature.allGetCandidature();
+    res.status(200).json(candidatures);
+  } catch (err) {
+    console.error('Erreur lors de la récupération des candidatures :', err.message);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+};
 exports.getCandidaturesByEmail = async (req, res) => {
   const email = req.params.email;
   console.log('email', req.params)
@@ -24,7 +35,7 @@ console.log('req.body.password', req.body.nomEt)
     
     
     const newCandidature= await Candidature.createCandidature(req.body);
-    console.log('first', newCandidature)
+   // console.log('first', newCandidature)
     res.status(201).json(newCandidature);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -64,11 +75,11 @@ const Paiement = async (amount, phoneNumber, email) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        amount: 1000,
+        amount: 75000,
         shop_name: 'Test Bourse University',
         message: "400",
-        success_url: 'https://df8c1e79a480.ngrok-free.app/paiement-success',
-        failure_url: 'https://df8c1e79a480.ngrok-free.app/paiement-echec',
+        success_url: 'https://gestionbourseback-1.onrender.com/paiement-success',
+        failure_url: 'https://gestionbourseback-1.onrender.com/paiement-echec',
         order_id: reference,
       
       })

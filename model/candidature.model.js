@@ -57,16 +57,23 @@ id: {
     type: DataTypes.STRING,
     defaultValue: 'en attente',
   },
+   statutTraitement: {
+    type: DataTypes.STRING,
+    defaultValue: 'en cour de traitement',
+  },
+   referencePaiement: {
+    type: DataTypes.STRING,
+  },
 
 }, {
-  tableName: 'Candidature'
+  tableName: 'candidature'
 });
 
 module.exports = Candidature;
 
 // Méthode statique pour créer un utilisateur
 Candidature.createCandidature = async function (userData) {
-  console.log('userData model', userData)
+  //console.log('userData model', userData)
   try {
     const newCandidature = await this.create({
       ...userData   // ✅ Déstructure les champs pour correspondre aux colonnes
@@ -92,6 +99,14 @@ Candidature.getByEmail = async function (email) {
     const candidatures = await this.findAll({
       where: { email }
     });
+    return candidatures;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+Candidature.allGetCandidature = async function () {
+  try {
+    const candidatures = await this.findAll();
     return candidatures;
   } catch (err) {
     throw new Error(err.message);

@@ -18,7 +18,7 @@ const NiveauEtude = sequelize.define('NiveauEtud', {
         allowNull: false
     }
 }, {
-  tableName: 'NiveauEtud'
+  tableName: 'niveauEtud'
 });
 
 module.exports = NiveauEtude;
