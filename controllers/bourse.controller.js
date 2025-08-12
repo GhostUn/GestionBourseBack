@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 
 exports.creationBourse = async (req, res) => {
-console.log('req.body.password', req.body.nomBourse)
+//console.log('req.body.password', req.body.nomBourse)
   try {
     
     const newbourse = await Bourse.createBourse(req.body);
@@ -16,7 +16,7 @@ console.log('req.body.password', req.body.nomBourse)
 
 exports.showBourse = async (req, res) => {
   const bourses = await Bourse.findAll();
-  console.log('bourses', bourses)
+//  console.log('bourses', bourses)
   res.json(bourses);
 };
 

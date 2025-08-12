@@ -7,7 +7,7 @@ const axios = require('axios');
 
 exports.getAllCandidature = async (req, res) => {
   const email = req.params.email;
-  console.log('email', req.params)
+  //console.log('email', req.params)
   try {
     const candidatures = await Candidature.allGetCandidature();
     res.status(200).json(candidatures);
@@ -18,7 +18,7 @@ exports.getAllCandidature = async (req, res) => {
 };
 exports.getCandidaturesByEmail = async (req, res) => {
   const email = req.params.email;
-  console.log('email', req.params)
+  //console.log('email', req.params)
   try {
     const candidatures = await Candidature.getByEmail(email);
     res.status(200).json(candidatures);
@@ -29,7 +29,7 @@ exports.getCandidaturesByEmail = async (req, res) => {
 };
 
 exports.creationCandidature = async (req, res) => {
-console.log('req.body.password', req.body.nomEt)
+//console.log('req.body.password', req.body.nomEt)
   try {
 
     
@@ -253,7 +253,7 @@ const Paiement = async (amount, phoneNumber, email) => {
 };*/
 
 exports.postuler = async (req, res) => {
-  console.log('📝 Données reçues:', req.body, req.files);
+//  console.log('📝 Données reçues:', req.body, req.files);
 
   try {
     const {
